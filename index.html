@@ -222,7 +222,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-04-03 13:45:52" itemprop="dateModified" datetime="2025-04-03T13:45:52+08:00">2025-04-03</time>
+      <time title="修改时间：2025-04-03 13:49:02" itemprop="dateModified" datetime="2025-04-03T13:49:02+08:00">2025-04-03</time>
     </span>
 
   
@@ -240,7 +240,8 @@
 <p>当目标线程进入**可警报状态（Alertable State）**时，系统会自动执行队列中的 APC 函数。</p>
 <p>每个线程都含有自己的APC队列</p>
 <p>因此我们可以借助QueueUserAPC WinAPI 将payload添加到指定线程的 APC 队列 等待执行。</p>
-<h4 id="将线程置于可警告状态"><a href="#将线程置于可警告状态" class="headerlink" title="将线程置于可警告状态"></a>将线程置于可警告状态</h4><p>执行排队函数的线程需要处于可警告状态，可以通过创建线程并使用如下API来实现</p>
+<p><strong>将线程置于可警告状态</strong></p>
+<p>执行排队函数的线程需要处于可警告状态，可以通过创建线程并使用如下API来实现</p>
 <ul>
 <li>Sleep(Ex) </li>
 <li>MsgWaitForMultipleObjects(Ex)</li>
