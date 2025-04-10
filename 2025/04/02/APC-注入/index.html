@@ -17,12 +17,12 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha256-dABdfBfUoC8vJUBOwGVdm8L9qlMWaHTIfXt+7GnZCIo=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"ic3ma0.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
     <meta name="description" content="这篇文章用来介绍一下APC注入 APC注入APC(异步过程调用) 一种windows操作系统的机制 使得程序可以异步执行任务 当目标线程进入**可警报状态（Alertable State）**时，系统会自动执行队列中的 APC 函数。 每个线程都含有自己的APC队列 因此我们可以借助QueueUserAPC WinAPI 将payload添加到指定线程的 APC 队列 等待执行。 将线程置于可警告">
 <meta property="og:type" content="article">
 <meta property="og:title" content="APC 注入">
-<meta property="og:url" content="http://example.com/2025/04/02/APC-%E6%B3%A8%E5%85%A5/index.html">
+<meta property="og:url" content="https://ic3ma0.github.io/2025/04/02/APC-%E6%B3%A8%E5%85%A5/">
 <meta property="og:site_name" content="Ic3Ma0&#39;s Blog">
 <meta property="og:description" content="这篇文章用来介绍一下APC注入 APC注入APC(异步过程调用) 一种windows操作系统的机制 使得程序可以异步执行任务 当目标线程进入**可警报状态（Alertable State）**时，系统会自动执行队列中的 APC 函数。 每个线程都含有自己的APC队列 因此我们可以借助QueueUserAPC WinAPI 将payload添加到指定线程的 APC 队列 等待执行。 将线程置于可警告">
 <meta property="og:locale" content="zh_CN">
@@ -36,10 +36,10 @@
 <meta name="twitter:image" content="c:\Users\86177\AppData\Roaming\Typora\typora-user-images\image-20250403130649245.png">
 
 
-<link rel="canonical" href="http://example.com/2025/04/02/APC-%E6%B3%A8%E5%85%A5/">
+<link rel="canonical" href="https://ic3ma0.github.io/2025/04/02/APC-%E6%B3%A8%E5%85%A5/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2025/04/02/APC-%E6%B3%A8%E5%85%A5/","path":"2025/04/02/APC-注入/","title":"APC 注入"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ic3ma0.github.io/2025/04/02/APC-%E6%B3%A8%E5%85%A5/","path":"2025/04/02/APC-注入/","title":"APC 注入"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
 <title>APC 注入 | Ic3Ma0's Blog</title>
@@ -95,7 +95,7 @@
       <p class="site-title">Ic3Ma0's Blog</p>
       <i class="logo-line"></i>
     </a>
-      <p class="site-subtitle" itemprop="description">渗透测试</p>
+      <p class="site-subtitle" itemprop="description">网络安全学习</p>
   </div>
 
   <div class="site-nav-right">
@@ -145,7 +145,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">3</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -193,7 +193,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2025/04/02/APC-%E6%B3%A8%E5%85%A5/">
+    <link itemprop="mainEntityOfPage" href="https://ic3ma0.github.io/2025/04/02/APC-%E6%B3%A8%E5%85%A5/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -285,6 +285,9 @@
                 </a>
             </div>
             <div class="post-nav-item">
+                <a href="/2025/04/03/%E6%98%A0%E5%B0%84%E6%B3%A8%E5%85%A5/" rel="next" title="映射注入">
+                  映射注入 <i class="fa fa-angle-right"></i>
+                </a>
             </div>
           </div>
     </footer>
