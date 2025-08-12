@@ -19,25 +19,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"ic3ma0.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.22.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"copycode":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js" defer></script>
 
-    <meta name="description" content="分享网络安全相关知识">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Ic3Ma0&#39;s Blog">
-<meta property="og:url" content="https://ic3ma0.github.io/index.html">
+    <meta name="description" content="URLDNS链-分析作用不需要依赖第三方的包 以及jdk的版本限制 所以通常用来检测反序列化的点 Gadget Chain分析 HashMap.readObject() 反序列化自动触发 HashMap.putVal() HashMap.hash() URL.hashCode() URL.getHostAddress(u) 触发DNS请求  分析下各个变量的赋值情况 HashMap.readObj">
+<meta property="og:type" content="article">
+<meta property="og:title" content="URLDNS链分析">
+<meta property="og:url" content="https://ic3ma0.github.io/2025/08/13/URLDNS%E9%93%BE/index.html">
 <meta property="og:site_name" content="Ic3Ma0&#39;s Blog">
-<meta property="og:description" content="分享网络安全相关知识">
+<meta property="og:description" content="URLDNS链-分析作用不需要依赖第三方的包 以及jdk的版本限制 所以通常用来检测反序列化的点 Gadget Chain分析 HashMap.readObject() 反序列化自动触发 HashMap.putVal() HashMap.hash() URL.hashCode() URL.getHostAddress(u) 触发DNS请求  分析下各个变量的赋值情况 HashMap.readObj">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-08-12T16:00:00.000Z">
+<meta property="article:modified_time" content="2025-08-12T16:34:28.442Z">
 <meta property="article:author" content="Ic3Ma0">
-<meta property="article:tag" content="渗透测试 内网渗透 域渗透 免杀">
+<meta property="article:tag" content="代码审计">
+<meta property="article:tag" content="java">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://ic3ma0.github.io/">
+<link rel="canonical" href="https://ic3ma0.github.io/2025/08/13/URLDNS%E9%93%BE/">
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://ic3ma0.github.io/2025/08/13/URLDNS%E9%93%BE/","path":"2025/08/13/URLDNS链/","title":"URLDNS链分析"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Ic3Ma0's Blog</title>
+<title>URLDNS链分析 | Ic3Ma0's Blog</title>
   
 
 
@@ -87,7 +90,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Ic3Ma0's Blog</h1>
+      <p class="site-title">Ic3Ma0's Blog</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">网络安全学习</p>
@@ -114,7 +117,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -127,6 +130,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#URLDNS%E9%93%BE-%E5%88%86%E6%9E%90"><span class="nav-number">1.</span> <span class="nav-text">URLDNS链-分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%9C%E7%94%A8"><span class="nav-number">1.1.</span> <span class="nav-text">作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Gadget-Chain%E5%88%86%E6%9E%90"><span class="nav-number">1.2.</span> <span class="nav-text">Gadget Chain分析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9E%84%E9%80%A0%E6%81%B6%E6%84%8F%E5%88%A9%E7%94%A8%E9%93%BE%E6%80%9D%E8%B7%AF"><span class="nav-number">1.3.</span> <span class="nav-text">构造恶意利用链思路</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0"><span class="nav-number">1.4.</span> <span class="nav-text">完整代码实现</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -164,16 +168,17 @@
 
     </div>
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://ic3ma0.github.io/2025/08/13/URLDNS%E9%93%BE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -187,13 +192,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Ic3Ma0's Blog">
+      <meta itemprop="name" content="URLDNS链分析 | Ic3Ma0's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/08/13/URLDNS%E9%93%BE/" class="post-title-link" itemprop="url">URLDNS链分析</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          URLDNS链分析
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -225,8 +230,7 @@
     
     
     
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="URLDNS链-分析"><a href="#URLDNS链-分析" class="headerlink" title="URLDNS链-分析"></a>URLDNS链-分析</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>不需要依赖第三方的包 以及jdk的版本限制 所以通常用来检测反序列化的点</p>
+    <div class="post-body" itemprop="articleBody"><h2 id="URLDNS链-分析"><a href="#URLDNS链-分析" class="headerlink" title="URLDNS链-分析"></a>URLDNS链-分析</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>不需要依赖第三方的包 以及jdk的版本限制 所以通常用来检测反序列化的点</p>
 <h3 id="Gadget-Chain分析"><a href="#Gadget-Chain分析" class="headerlink" title="Gadget Chain分析"></a>Gadget Chain分析</h3><ul>
 <li>HashMap.readObject() 反序列化自动触发</li>
 <li>HashMap.putVal()</li>
@@ -259,7 +263,6 @@
 
 
 
-      
     </div>
 
     
@@ -267,8 +270,22 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="post-tags">
+              <a href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" rel="tag"># 代码审计</a>
+              <a href="/tags/java/" rel="tag"># java</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2025/04/11/Virtualbox_kali/" rel="prev" title="VirutalBox导入kali遇到的坑点">
+                  <i class="fa fa-angle-left"></i> VirutalBox导入kali遇到的坑点
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
     </footer>
   </article>
 </div>
@@ -276,9 +293,7 @@
 
 
 
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
+
 
 </div>
   </main>

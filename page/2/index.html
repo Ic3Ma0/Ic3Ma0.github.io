@@ -139,16 +139,16 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-count">5</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
-        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-count">5</span>
         <span class="site-state-item-name">分类</span>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span>
       </div>
   </nav>
@@ -174,7 +174,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://ic3ma0.github.io/2025/04/10/aboutme/">
+    <link itemprop="mainEntityOfPage" href="https://ic3ma0.github.io/2025/04/11/Virtualbox_kali/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -192,7 +192,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/04/10/aboutme/" class="post-title-link" itemprop="url">个人主页</a>
+          <a href="/2025/04/11/Virtualbox_kali/" class="post-title-link" itemprop="url">VirutalBox导入kali遇到的坑点</a>
         </h2>
 
         <div class="post-meta-container">
@@ -204,7 +204,7 @@
       <span class="post-meta-item-text">发表于</span>
       
 
-      <time title="创建时间：2025-04-10 19:47:03 / 修改时间：23:10:09" itemprop="dateCreated datePublished" datetime="2025-04-10T19:47:03+08:00">2025-04-10</time>
+      <time title="创建时间：2025-04-11 00:00:00 / 修改时间：15:29:47" itemprop="dateCreated datePublished" datetime="2025-04-11T00:00:00+08:00">2025-04-11</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -212,7 +212,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/about/" itemprop="url" rel="index"><span itemprop="name">about</span></a>
+          <a href="/categories/pentest/" itemprop="url" rel="index"><span itemprop="name">pentest</span></a>
         </span>
     </span>
 
@@ -226,18 +226,20 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="你好，我是-Ic3Ma0"><a href="#你好，我是-Ic3Ma0" class="headerlink" title="你好，我是 Ic3Ma0"></a>你好，我是 Ic3Ma0</h1><p>欢迎来到我的个人博客！我是一名网络安全爱好者，专注于渗透测试、免杀技术、内网渗透等领域。通过这个博客，我希望能够与大家分享一些我的学习经验和技术研究。</p>
-<h2 id="技术专长"><a href="#技术专长" class="headerlink" title="技术专长"></a>技术专长</h2><ul>
-<li><strong>渗透测试</strong>：包括外网渗透、内网渗透、域渗透等。</li>
-<li><strong>免杀技术</strong>：研究如何绕过防病毒软件及其他安全防护措施。</li>
-<li><strong>安全分析</strong>：对常见的恶意软件进行逆向分析，找出漏洞和弱点。</li>
-<li><strong>编程语言</strong>：精通 C&#x2F;C++、Python、Go 等语言，熟悉低级系统编程。</li>
-</ul>
-<h2 id="联系我"><a href="#联系我" class="headerlink" title="联系我"></a>联系我</h2><ul>
-<li><strong>GitHub</strong>: <a target="_blank" rel="noopener" href="https://github.com/Ic3Ma0">Ic3Ma0</a></li>
-<li><strong>邮件</strong>: <a href="mailto:&#x69;&#x63;&#x33;&#109;&#x61;&#x30;&#64;&#103;&#109;&#x61;&#x69;&#x6c;&#46;&#x63;&#111;&#x6d;">ic3ma0@gmail.com</a></li>
-</ul>
-<h2 id="我的博客"><a href="#我的博客" class="headerlink" title="我的博客"></a>我的博客</h2><p>在我的博客中，您将找到关于网络安全、渗透测试、内网渗透等相关技术的文章。我会定期更新，欢迎您关注与学习。</p>
+          <p>这件事情的经过起源于 我在今天尝试用VirtualBox来安装kali</p>
+<p>结果在按照官方的教程来导入时 遇到了一个奇怪的错误</p>
+<p><a target="_blank" rel="noopener" href="https://www.kali.org/docs/virtualization/import-premade-virtualbox/(%E5%AE%98%E6%96%B9%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B)">https://www.kali.org/docs/virtualization/import-premade-virtualbox/(官方安装教程)</a></p>
+<p>当我启动kali时 出现了这样的错误</p>
+<p><img src="/../images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250411151210.png" alt="图片"></p>
+<p>首先我找到了VirtualBox的解决方案</p>
+<p><a target="_blank" rel="noopener" href="https://forums.virtualbox.org/viewtopic.php?p=387186&sid=745e84b64bd83a3d035e02e41a17d615#p387186">https://forums.virtualbox.org/viewtopic.php?p=387186&amp;sid=745e84b64bd83a3d035e02e41a17d615#p387186</a></p>
+<p>提示我观察日志 <code>VBoxHardening.log</code> 可当我划到最下面的时候  最并没有解决方案中的那些中可能</p>
+<p>而是另一个错误代码  <strong>ExitCode&#x3D;0xc0000409</strong></p>
+<p>这令我很恼火 直到我找到了这个<a target="_blank" rel="noopener" href="https://blog.csdn.net/JaCenz/article/details/115827030">https://blog.csdn.net/JaCenz/article/details/115827030</a> 当我翻看评论区时</p>
+<p><img src="/../images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250411151206.png"></p>
+<p>？？？ 卸载完美世界 当我卸载后 尝试启动kali时 真的成功了 </p>
+<p><img src="/../images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250411150516.png" alt="图片"></p>
+<p>好吧 可以说这是我见过的最诡异的bug！！！</p>
 
       
     </div>
@@ -257,7 +259,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
